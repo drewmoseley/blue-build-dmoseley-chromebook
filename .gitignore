@@ -1,3 +1,6 @@
 cosign.key
 cosign.private
 /Containerfile
+*.iso
+*.iso-CHECKSUM
+Containerfile.full
