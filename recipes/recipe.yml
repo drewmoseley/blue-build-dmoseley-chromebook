@@ -7,7 +7,7 @@ description: Personal OS image for drewmoseley.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bluefin-dx
-image-version: latest
+image-version: stable
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -44,9 +44,31 @@ modules:
           - com.google.Chrome
           - com.mattjakeman.ExtensionManager
           - com.slack.Slack
+          - com.thincast.client
+          - io.github.dvlv.boxbuddyrs
+          - io.github.flattool.Warehouse
+          - io.missioncenter.MissionCenter
           - io.unobserved.espansoGUI
           - net.cozic.joplin_desktop
+          - org.fedoraproject.MediaWriter
           - org.gimp.GIMP
+          - org.gnome.Calculator
+          - org.gnome.Calendar
+          - org.gnome.Characters
+          - org.gnome.Connections
+          - org.gnome.Contacts
+          - org.gnome.DejaDup
+          - org.gnome.Logs
+          - org.gnome.Loupe
+          # - org.gnome.Loupe.HEIC
+          - org.gnome.Maps
+          - org.gnome.NautilusPreviewer
+          - org.gnome.TextEditor
+          - org.gnome.Weather
+          - org.gnome.World.PikaBackup
+          - org.gnome.baobab
+          - org.gnome.clocks
+          - org.gnome.font-viewer
           - org.inkscape.Inkscape
           - org.mozilla.Thunderbird
           - org.mozilla.firefox
@@ -55,5 +77,27 @@ modules:
           - org.videolan.VLC
           - us.zoom.Zoom
       - scope: user # Also add Flathub user repo, but no user packages
+
+  - type: bling
+    install:
+      - ublue-update # https://github.com/ublue-os/ublue-update
+
+  - type: gnome-extensions
+    install:
+      - Advanced Weather Companion
+      - 779 # Clipboard Indicator by Tudmotu
+      - Easy Docker Containers
+      - Night Theme Switcher
+      - Tailscale Status
+      - Vitals
+
+  - type: brew
+    nofile-limits: true # increase nofile limits
+    brew-analytics: false # disable telemetry
+
+  - type: chezmoi
+    repository: "git@github.com:drewmoseley/dotfiles-chezmoi.git"
+    all-users: false
+    file-conflict-policy: replace
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
