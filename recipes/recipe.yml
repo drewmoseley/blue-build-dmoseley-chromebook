@@ -97,7 +97,11 @@ modules:
 
   - type: chezmoi
     repository: "git@github.com:drewmoseley/dotfiles-chezmoi.git"
-    all-users: false
+    all-users: true
     file-conflict-policy: replace
+
+  - type: copy
+    src: gdm-custom.conf
+    dest: /usr/etc/gdm/custom.conf
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
