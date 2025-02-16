@@ -25,6 +25,8 @@ modules:
       - bmap-tools
       #- chromebook-linux-audio
       #- cros-keyboard-map
+      - aspell
+      - aspell-en
       - emacs
       - keyd
       - NetworkManager-fortisslvpn
