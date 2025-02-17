@@ -29,6 +29,7 @@ modules:
       - aspell-en
       - emacs
       - keyd
+      - mkosi
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
       - wev
