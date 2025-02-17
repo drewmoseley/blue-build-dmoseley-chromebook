@@ -32,6 +32,8 @@ modules:
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
       - wev
+    remove:
+      - code
 
   - type: default-flatpaks
     configurations:
