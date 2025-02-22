@@ -22,16 +22,21 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
       - https://terra.fyralabs.com/terra.repo
     install:
-      - bmap-tools
-      #- chromebook-linux-audio
-      #- cros-keyboard-map
-      - aspell
-      - aspell-en
-      - emacs
-      - keyd
-      - mkosi
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
+      - aspell
+      - aspell-en
+      - autoconf
+      - automake
+      - bmap-tools
+      #- chromebook-linux-audio
+      - cmake
+      #- cros-keyboard-map
+      - emacs
+      - keyd
+      - libstdc++-static.x86_64
+      - libtool
+      - mkosi
       - wev
     remove:
       - code
