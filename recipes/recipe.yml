@@ -89,9 +89,9 @@ modules:
           - us.zoom.Zoom
       - scope: user # Also add Flathub user repo, but no user packages
 
-  - type: bling
-    install:
-      - ublue-update # https://github.com/ublue-os/ublue-update
+  #- type: bling
+  #  install:
+  #    - ublue-update # https://github.com/ublue-os/ublue-update
 
   - type: gnome-extensions
     install:
