@@ -33,6 +33,7 @@ modules:
       - cmake
       #- cros-keyboard-map
       - emacs
+      - git-credential-manager
       - keyd
       - libstdc++-static.x86_64
       - libtool
