@@ -95,12 +95,12 @@ modules:
 
   - type: gnome-extensions
     install:
-      - Advanced Weather Companion
       - 779 # Clipboard Indicator by Tudmotu
       - Easy Docker Containers
       - Night Theme Switcher
       - Tailscale Status
       - Vitals
+      - Weather O'Clock
 
   - type: brew
     nofile-limits: true # increase nofile limits
