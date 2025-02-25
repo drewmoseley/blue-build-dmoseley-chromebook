@@ -22,8 +22,8 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
       - https://terra.fyralabs.com/terra.repo
     install:
-      - NetworkManager-fortisslvpn
-      - NetworkManager-fortisslvpn-gnome
+      #- NetworkManager-fortisslvpn
+      #- NetworkManager-fortisslvpn-gnome
       - aspell
       - aspell-en
       - autoconf
