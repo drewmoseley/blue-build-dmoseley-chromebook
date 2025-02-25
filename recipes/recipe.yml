@@ -37,7 +37,6 @@ modules:
       - keyd
       - libstdc++-static.x86_64
       - libtool
-      - mkosi
       - pass
       - wev
     remove:
