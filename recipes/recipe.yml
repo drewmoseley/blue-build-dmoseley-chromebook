@@ -41,8 +41,8 @@ modules:
       - mkosi
       - pass
       - vagrant
-      - vagrant-digitalocean
-      - vagrant-libvirt
+      #- vagrant-digitalocean
+      #- vagrant-libvirt
       - wev
     remove:
       - code
