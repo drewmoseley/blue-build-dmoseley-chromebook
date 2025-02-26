@@ -41,12 +41,9 @@ modules:
       - mkosi
       - pass
       - vagrant
-      #- vagrant-digitalocean
-      #- vagrant-libvirt
       - wev
     remove:
       - code
-
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
