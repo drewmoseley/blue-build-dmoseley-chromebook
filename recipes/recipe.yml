@@ -21,6 +21,7 @@ modules:
     repos:
       - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
       - https://terra.fyralabs.com/terra.repo
+      - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     install:
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
@@ -40,10 +41,12 @@ modules:
       - libtool
       - mkosi
       - pass
-      # - vagrant
+      - vagrant
       - wev
     remove:
       - code
+    optfix:
+      - /vagrant
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
