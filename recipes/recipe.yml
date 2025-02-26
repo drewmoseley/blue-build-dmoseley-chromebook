@@ -24,6 +24,7 @@ modules:
     install:
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
+      - ansible
       - aspell
       - aspell-en
       - autoconf
@@ -37,7 +38,11 @@ modules:
       - keyd
       - libstdc++-static.x86_64
       - libtool
+      - mkosi
       - pass
+      - vagrant
+      - vagrant-digitalocean
+      - vagrant-libvirt
       - wev
     remove:
       - code
