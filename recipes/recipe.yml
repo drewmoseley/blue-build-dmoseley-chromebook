@@ -39,6 +39,7 @@ modules:
       - keyd
       - libstdc++-static.x86_64
       - libtool
+      - libvirt-devel
       - mkosi
       - pass
       - vagrant
