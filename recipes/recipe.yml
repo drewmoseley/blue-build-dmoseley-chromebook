@@ -17,6 +17,12 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  - type: bling
+    install:
+      - dconf-update-service
+      - rpmfusion
+      - ublue-update # https://github.com/ublue-os/ublue-update
+
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
@@ -44,12 +50,13 @@ modules:
       - pass
       - syncthing
       - vagrant
-      - virtualbox
+      - VirtualBox
       - wev
     remove:
       - code
     optfix:
       - /vagrant
+
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
@@ -101,12 +108,6 @@ modules:
           - org.videolan.VLC
           - us.zoom.Zoom
       - scope: user # Also add Flathub user repo, but no user packages
-
-  - type: bling
-    install:
-      - dconf-update-service
-      - rpmfusion
-      - ublue-update # https://github.com/ublue-os/ublue-update
 
   - type: gnome-extensions
     install:
