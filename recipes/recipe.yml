@@ -21,7 +21,7 @@ modules:
     install:
       - dconf-update-service
       - rpmfusion
-      - ublue-update # https://github.com/ublue-os/ublue-update
+      #- ublue-update # https://github.com/ublue-os/ublue-update
 
   - type: rpm-ostree
     repos:
