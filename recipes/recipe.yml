@@ -105,7 +105,7 @@ modules:
   - type: bling
     install:
       - rpmfusion
-  #    - ublue-update # https://github.com/ublue-os/ublue-update
+      - ublue-update # https://github.com/ublue-os/ublue-update
 
   - type: gnome-extensions
     install:
