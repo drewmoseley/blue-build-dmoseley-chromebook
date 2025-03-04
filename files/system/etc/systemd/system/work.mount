@@ -1,5 +1,0 @@
-[Mount]
-What=/home/dmoseley/work
-Where=/work
-Type=none
-Options=bind
