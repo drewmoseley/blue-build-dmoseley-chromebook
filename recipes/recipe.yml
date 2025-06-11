@@ -76,6 +76,7 @@ modules:
           - io.github.martchus.syncthingtray
           # - io.github.softfever.OrcaSlicer
           - io.missioncenter.MissionCenter
+          - io.podman_desktop.PodmanDesktop
           - io.unobserved.espansoGUI
           - net.cozic.joplin_desktop
           - org.fedoraproject.MediaWriter
