@@ -1,7 +1,7 @@
 [org.gnome.desktop.peripherals.touchpad]
 tap-to-click=false
 natural-scroll=true
-click-method=areas
+click-method='areas'
 edge-scrolling-enabled=false
 two-finger-scrolling-enabled=true
 
