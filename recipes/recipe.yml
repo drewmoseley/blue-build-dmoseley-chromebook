@@ -74,7 +74,7 @@ modules:
           - io.github.dvlv.boxbuddyrs
           - io.github.flattool.Warehouse
           - io.github.martchus.syncthingtray
-          # - io.github.softfever.OrcaSlicer
+          - io.github.softfever.OrcaSlicer
           - io.missioncenter.MissionCenter
           - io.podman_desktop.PodmanDesktop
           - io.unobserved.espansoGUI
