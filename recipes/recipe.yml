@@ -48,6 +48,7 @@ modules:
       - libvirt-devel
       - mkosi
       - pass
+      - pcsc-tools
       - syncthing
       - vagrant
       - wev
