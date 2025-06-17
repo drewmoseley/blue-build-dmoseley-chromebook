@@ -40,6 +40,7 @@ modules:
       - cmake
       #- cros-keyboard-map
       - emacs
+      - g++
       - git-credential-manager
       - keyd
       - libstdc++-static.x86_64
