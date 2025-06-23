@@ -36,19 +36,26 @@ modules:
       - autoconf
       - automake
       - bmap-tools
+      - btrfs-progs
       #- chromebook-linux-audio
       - cmake
       #- cros-keyboard-map
+      - debootstrap
+      - dosfstools
+      - e2fsprogs
       - emacs
       - g++
       - git-credential-manager
+      - grub2
       - keyd
       - libstdc++-static.x86_64
       - libtool
       - libvirt-devel
-      - mkosi
+      #- mkosi
+      - parted
       - pass
       - pcsc-tools
+      - qemu-user-static
       - syncthing
       - vagrant
       - wev
