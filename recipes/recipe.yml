@@ -56,7 +56,6 @@ modules:
       - pass
       - pcsc-tools
       - qemu-user-static
-      - qemu-arm64-static
       - systemd-ukify
       - grub2-tools
       - syncthing
