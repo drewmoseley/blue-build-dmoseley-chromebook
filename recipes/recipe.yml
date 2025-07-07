@@ -31,6 +31,7 @@ modules:
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
       - ansible
+      - apcupsd
       - apt
       - aspell
       - aspell-en
