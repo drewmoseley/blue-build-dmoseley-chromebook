@@ -83,6 +83,7 @@ modules:
           - com.prusa3d.PrusaSlicer
           - com.slack.Slack
           - com.thincast.client
+          - com.todoist.Todoist
           - com.ultimaker.cura
           - io.github.dvlv.boxbuddyrs
           - io.github.flattool.Warehouse
