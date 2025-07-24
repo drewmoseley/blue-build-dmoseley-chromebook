@@ -1,0 +1,8 @@
+[Unit]
+Description=Automount for /work
+
+[Automount]
+Where=/work
+
+[Install]
+WantedBy=multi-user.target
