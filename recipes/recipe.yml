@@ -49,6 +49,7 @@ modules:
       - e2fsprogs
       - emacs
       - firefoxpwa
+      - firefox
       - g++
       - git-credential-manager
       - grub2
