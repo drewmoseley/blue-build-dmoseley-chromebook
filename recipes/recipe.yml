@@ -68,6 +68,7 @@ modules:
       - code
     optfix:
       - /vagrant
+      - /uptane-sign
 
   - type: default-flatpaks
     configurations:
