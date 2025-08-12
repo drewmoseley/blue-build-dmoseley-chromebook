@@ -48,6 +48,7 @@ modules:
       - g++
       - git-credential-manager
       - grub2
+      - java-21-openjdk-headless
       - keyd
       - libstdc++-static.x86_64
       - libtool
@@ -143,5 +144,9 @@ modules:
   - type: gschema-overrides
     include:
       - dmoseley.gschema.override
+
+  - type: script
+    scripts:
+      - install-uptane-sign.sh
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
