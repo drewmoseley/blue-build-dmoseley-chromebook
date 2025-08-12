@@ -27,9 +27,6 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
       - https://terra.fyralabs.com/terra.repo
       - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-      - firefoxpwa.repo
-    keys:
-      - https://packagecloud.io/filips/FirefoxPWA/gpgkey
     install:
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
@@ -48,7 +45,6 @@ modules:
       - dosfstools
       - e2fsprogs
       - emacs
-      - firefoxpwa
       - g++
       - git-credential-manager
       - grub2
