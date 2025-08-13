@@ -70,6 +70,26 @@ modules:
       - /vagrant
       - /uptane-sign
 
+  # Delete Fedora packaged docker and friends
+  - type: rpm-ostree
+    remove:
+      - docker-ce-cli
+      - docker-ce
+      - docker-ce-rootless-extras
+      - docker-compose-plugin
+      - docker-buildx-plugin
+
+  # Install Docker.com packaged docker and friends
+  - type: rpm-ostree
+    repos:
+      - https://download.docker.com/linux/fedora/docker-ce.repo
+    install:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
