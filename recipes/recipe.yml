@@ -54,7 +54,7 @@ modules:
       - libtool
       - libvirt-devel
       #- mkosi
-      - nut
+      - nut-client
       - parted
       - pass
       - pcsc-tools
