@@ -45,6 +45,11 @@ modules:
         owner: root
         group: nut
         mode: 0640
+      - source: ups/.msmtprc
+        destination: /etc/ups/.msmtprc
+        owner: root
+        group: nut
+        mode: 0640
 
   - type: bling
     install:
