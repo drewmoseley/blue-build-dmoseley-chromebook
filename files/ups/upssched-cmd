@@ -8,6 +8,7 @@ send_mail() {
   SUBJECT="$1"
   BODY="$2"
   logger -t upssched-cmd "$SUBJECT - $BODY"
+  echo "$SUBJECT - $BODY" >> /var/log/nut-events.log
   echo "$BODY" | /etc/ups/msmtp-mail.sh -s "$SUBJECT" "$MAIL_TO"
 }
 

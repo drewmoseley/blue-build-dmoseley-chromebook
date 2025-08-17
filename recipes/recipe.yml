@@ -50,6 +50,11 @@ modules:
         owner: root
         group: nut
         mode: 0640
+      - source: ups/nut-events
+        destination: /etc/logrotate.d/nut-events
+        owner: root
+        group: root
+        mode: 0644
 
   - type: bling
     install:
