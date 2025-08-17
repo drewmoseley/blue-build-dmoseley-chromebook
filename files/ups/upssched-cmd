@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 MAIL_TO="drew.moseley@gmail.com"
 
 send_mail() {
