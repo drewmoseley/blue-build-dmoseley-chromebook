@@ -37,6 +37,9 @@ Host: $(hostname)"
   online)
     send_mail "NUT $(hostname -s): Back on line power" "Client detected UPS back on line at $(date)"
     ;;
+  lowbatt)
+    send_mail "NUT $(hostname -s): Battery low" "Client reports UPS battery low at $(date)"
+    ;;
   *)
     # No mail for other events (quiet client)
     logger -t upssched-cmd "Ignored event: $1"
