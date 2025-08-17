@@ -17,6 +17,35 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  # NUT UPS config files
+  - type: files
+    files:
+      - source: ups/msmtp-mail.sh
+        destination: /etc/ups/msmtp-mail.sh
+        owner: root
+        group: nut
+        mode: 0750
+      - source: ups/nut.conf
+        destination: /etc/ups/nut.conf
+        owner: root
+        group: nut
+        mode: 0640
+      - source: ups/upsmon.conf
+        destination: /etc/ups/upsmon.conf
+        owner: root
+        group: nut
+        mode: 0640
+      - source: ups/upssched-cmd
+        destination: /etc/ups/upssched-cmd
+        owner: root
+        group: nut
+        mode: 0750
+      - source: ups/upssched.conf
+        destination: /etc/ups/upssched.conf
+        owner: root
+        group: nut
+        mode: 0640
+
   - type: bling
     install:
       - dconf-update-service
