@@ -4,45 +4,44 @@ set -eu
 
 MAIL_TO="drew.moseley@gmail.com"
 
-send_mail() {
+log() {
   SUBJECT="$1"
   BODY="$2"
   logger -t upssched-cmd "$SUBJECT - $BODY"
   echo "$SUBJECT - $BODY" >> /var/log/nut-events.log
-  echo "$BODY" | /etc/ups/msmtp-mail.sh -s "$SUBJECT" "$MAIL_TO"
+  [ "$3" != "--no-mail"] && echo "$BODY" | /etc/ups/msmtp-mail.sh -s "$SUBJECT" "$MAIL_TO"
 }
 
 case "$1" in
   fsd)
-    send_mail "NUT $(hostname -s): Forced shutdown received" \
+    log "NUT $(hostname -s): Forced shutdown received" \
       "This client received FSD from the NUT server and will shut down now.
 Time: $(date)
 Host: $(hostname)"
     /usr/sbin/upsmon -c fsd
     ;;
   shutdown)
-    send_mail "NUT $(hostname -s): Shutdown proceeding" \
+    log "NUT $(hostname -s): Shutdown proceeding" \
       "This client is executing its shutdown sequence.
 Time: $(date)
 Host: $(hostname)"
     ;;
   commbad)
-    send_mail "NUT $(hostname -s): Communication lost" "upsmon reported COMMBAD at $(date)"
+    log "NUT $(hostname -s): Communication lost" "upsmon reported COMMBAD at $(date)" --no-mail
     ;;
   commok)
-    send_mail "NUT $(hostname -s): Communication restored" "upsmon reported COMMOK at $(date)"
+    log "NUT $(hostname -s): Communication restored" "upsmon reported COMMOK at $(date)" --no-mail
     ;;
   onbatt)
-    send_mail "NUT $(hostname -s): On battery" "Client detected UPS on battery at $(date)"
+    log "NUT $(hostname -s): On battery" "Client detected UPS on battery at $(date)"
     ;;
   online)
-    send_mail "NUT $(hostname -s): Back on line power" "Client detected UPS back on line at $(date)"
+    log "NUT $(hostname -s): Back on line power" "Client detected UPS back on line at $(date)"
     ;;
   lowbatt)
-    send_mail "NUT $(hostname -s): Battery low" "Client reports UPS battery low at $(date)"
+    log "NUT $(hostname -s): Battery low" "Client reports UPS battery low at $(date)"
     ;;
   *)
-    # No mail for other events (quiet client)
-    logger -t upssched-cmd "Ignored event: $1"
+    log "NUT $(hostname -s): $1" "Unrecognized command: $1 at $(date)" --no-mail
     ;;
 esac
