@@ -1,0 +1,14 @@
+[Unit]
+Description=Check ZFS + MD RAID + SMART/NVMe and email via msmtp and log to syslog
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Environment=HOME=/root
+# Optional overrides:
+# Environment=MSMTP_CONF=/etc/msmtprc
+# Environment=MSMTP_ACCOUNT=default
+# Environment=MSMTP_DEBUG=1
+ExecStart=/usr/libexec/storage-health-check.sh

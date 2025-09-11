@@ -1,0 +1,12 @@
+[Unit]
+Description=Run storage health check hourly
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=1h
+Unit=storage-health.service
+AccuracySec=1min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
