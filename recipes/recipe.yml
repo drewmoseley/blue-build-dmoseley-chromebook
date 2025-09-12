@@ -225,6 +225,10 @@ modules:
     system:
       enabled:
         - kargs-cleanup.service
+        - ext.automount
+        - work.automount
+        - setup-user-groups.service
+        - storage-health.timer
       masked:
         - plymouth-start.service
         - plymouth-quit.service

@@ -1,0 +1,8 @@
+[Unit]
+Description=Automount for /ext
+
+[Automount]
+Where=/ext
+
+[Install]
+WantedBy=multi-user.target
