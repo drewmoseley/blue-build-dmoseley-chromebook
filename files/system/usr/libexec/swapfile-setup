@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+SWAP_PRI="${SWAP_PRI:-5}"
+SWAP_GIB="${SWAP_GIB:-16}"
+RAM_LIMIT_GIB="${RAM_LIMIT_GIB:-32}"
+SWAP_PATH=/var/swapfile
+
+RAM_GIB=$(awk '/MemTotal:/ {printf "%.0f\n", $2/1024/1024}' /proc/meminfo)
+[[ -f /etc/default/swapfile-setup ]] && . /etc/default/swapfile-setup
+
+if (( RAM_GIB > RAM_LIMIT_GIB )); then
+  echo "swapfile-setup: Skipping (RAM=${RAM_GIB}G > ${RAM_LIMIT_GIB}G)."
+  exit 0
+fi
+
+if [[ -e "$SWAP_PATH" ]]; then
+  echo "swapfile-setup: $SWAP_PATH exists; nothing to do."
+  exit 0
+fi
+
+FS_TYPE=$(stat -f -c %T /var)
+echo "swapfile-setup: FS=${FS_TYPE}, RAM=${RAM_GIB}G, creating ${SWAP_GIB}G $SWAP_PATH"
+
+# Create empty file
+truncate -s 0 "$SWAP_PATH"
+chmod 600 "$SWAP_PATH"
+
+if [[ "$FS_TYPE" == "btrfs" ]]; then
+  # Required on btrfs
+  chattr +C "$SWAP_PATH" || true
+  btrfs property set "$SWAP_PATH" compression none || true
+fi
+
+# Allocate blocks explicitly (no holes, safe on btrfs too)
+dd if=/dev/zero of="$SWAP_PATH" bs=1M count=$(( SWAP_GIB * 1024 )) status=progress conv=fsync
+
+# Label SELinux if active
+restorecon -v "$SWAP_PATH" 2>/dev/null || true
+
+mkswap "$SWAP_PATH"

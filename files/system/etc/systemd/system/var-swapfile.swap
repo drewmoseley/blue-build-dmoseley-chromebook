@@ -1,0 +1,13 @@
+[Unit]
+Description=Disk-based swapfile (overflow tier)
+RequiresMountsFor=/var
+Wants=swapfile-setup.service
+After=swapfile-setup.service
+ConditionPathExists=/var/swapfile
+
+[Swap]
+What=/var/swapfile
+Priority=5
+
+[Install]
+WantedBy=swap.target

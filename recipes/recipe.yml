@@ -222,6 +222,8 @@ modules:
         - setup-user-groups.service
         - storage-health.timer
         - resource-logger.timer
+        - swapfile-setup.service
+        - var-swapfile.swap
       masked:
         - plymouth-start.service
         - plymouth-quit.service
