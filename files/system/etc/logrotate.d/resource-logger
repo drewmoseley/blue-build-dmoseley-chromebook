@@ -1,0 +1,12 @@
+/var/log/resource-logs/resource-usage.log {
+    daily
+    rotate 30
+    compress
+    delaycompress
+    missingok
+    notifempty
+    copytruncate
+    dateext
+    su root adm
+    maxsize 10M
+}

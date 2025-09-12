@@ -221,6 +221,7 @@ modules:
         - work.automount
         - setup-user-groups.service
         - storage-health.timer
+        - resource-logger.timer
       masked:
         - plymouth-start.service
         - plymouth-quit.service

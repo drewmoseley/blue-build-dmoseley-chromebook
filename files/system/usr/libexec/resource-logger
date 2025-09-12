@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+LOGDIR=/var/log/resource-logs
+LOGFILE="$LOGDIR/resource-usage.log"
+TS=$(date +"%Y-%m-%d_%H-%M-%S")
+
+# Make sure the logdir exists (tmpfiles.d will also ensure this at boot)
+mkdir -p "$LOGDIR"
+
+{
+  echo "===== Resource Snapshot at $TS ====="
+  echo
+  echo "[free -h]"
+  free -h || true
+  echo
+  echo "[top -b -n1 | head -n 20]"
+  top -b -n1 | head -n 20 || true
+  echo
+  echo "[ps -eo pid,ppid,comm,%cpu,%mem --sort=-%cpu | head -n 15]"
+  ps -eo pid,ppid,comm,%cpu,%mem --sort=-%cpu | head -n 15 || true
+  echo
+  echo "[ps -eo pid,ppid,comm,%cpu,%mem --sort=-%mem | head -n 15]"
+  ps -eo pid,ppid,comm,%cpu,%mem --sort=-%mem | head -n 15 || true
+  echo -e "\n"
+} >> "$LOGFILE"
+
+# predictable perms so adm group can read
+chgrp adm "$LOGFILE" 2>/dev/null || true
+chmod 0640 "$LOGFILE" 2>/dev/null || true

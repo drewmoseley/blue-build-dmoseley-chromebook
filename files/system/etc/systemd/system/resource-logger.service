@@ -1,0 +1,10 @@
+[Unit]
+Description=Log CPU, memory, and top processes to /var/log/resource-logs
+
+[Service]
+Type=oneshot
+# Be polite to the system
+Nice=10
+IOSchedulingClass=2
+IOSchedulingPriority=7
+ExecStart=/usr/libexec/resource-logger
