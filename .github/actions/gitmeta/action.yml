@@ -1,0 +1,44 @@
+name: Git metadata files
+description: Write git commit/log into files/system/etc for BlueBuild to copy
+inputs:
+  log_count:
+    description: Number of commits to include in the short log
+    required: false
+    default: "30"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate git metadata
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p files/system/etc
+
+        commit="$(git rev-parse HEAD)"
+        branch="${GITHUB_REF_NAME:-$(git rev-parse --abbrev-ref HEAD || true)}"
+        describe="$(git describe --tags --always --dirty --broken || echo "$commit")"
+        remote="$(git config --get remote.origin.url || echo "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}")"
+        cdate="$(git show -s --format=%cI "$commit" || date -u +'%Y-%m-%dT%H:%M:%SZ')"
+        author="$(git show -s --format='%an <%ae>' "$commit" || echo "${GITHUB_ACTOR:-unknown}")"
+        dirty="no"; git status --porcelain=v1 | grep -q . && dirty="yes"
+        diffstat="$(git diff --shortstat || true)"
+
+        {
+          echo "build_timestamp_utc: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          echo "repo_remote: $remote"
+          echo "branch: $branch"
+          echo "commit: $commit"
+          echo "describe: $describe"
+          echo "commit_date: $cdate"
+          echo "author: $author"
+          echo "dirty_tree: $dirty"
+          echo "diffstat: $diffstat"
+          echo "github_run_id: ${GITHUB_RUN_ID:-}"
+          echo "github_run_number: ${GITHUB_RUN_NUMBER:-}"
+          echo "github_ref: ${GITHUB_REF:-}"
+        } > files/system/etc/bluebuild-buildinfo.txt
+
+        git log --no-decorate --date=short --pretty='format:%h %ad %an %s' \
+          -n "${{ inputs.log_count }}" \
+          > files/system/etc/bluebuild-gitlog.txt
