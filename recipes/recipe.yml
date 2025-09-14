@@ -12,6 +12,16 @@ image-version: stable
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
+  - type: kargs
+    kargs:
+      - systemd.show_status=1
+      - rd.udev.log_priority=debug
+      - plymouth.enable=0
+      - rd.plymouth=0
+      - plymouth.ignore-serial-consoles
+      - systemd.show_status=1
+      - rd.udev.log_priority=debug
+
   - type: files
     files:
       - source: system
@@ -210,3 +220,13 @@ modules:
       - install-uptane-sign.sh
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
+
+  - type: systemd
+    system:
+      enabled:
+        - kargs-cleanup.service
+      masked:
+        - plymouth-start.service
+        - plymouth-quit.service
+        - plymouth-quit-wait.service
+        - plymouth-read-write.service

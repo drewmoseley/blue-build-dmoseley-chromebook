@@ -1,0 +1,10 @@
+[Unit]
+Description=One-shot removal of default quiet/rhgb/splash kernel args
+ConditionPathExists=!/var/lib/kargs-cleanup.done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/kargs-cleanup
+
+[Install]
+WantedBy=multi-user.target

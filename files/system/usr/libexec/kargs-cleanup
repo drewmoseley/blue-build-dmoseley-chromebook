@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+STAMP=/var/lib/kargs-cleanup.done
+[[ -e "$STAMP" ]] && exit 0
+if command -v rpm-ostree >/dev/null 2>&1; then
+    for arg in quiet rhgb splash; do
+        rpm-ostree kargs --delete=$arg || true
+    done
+fi
+mkdir -p "$(dirname "$STAMP")"
+touch "$STAMP"
