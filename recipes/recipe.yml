@@ -64,9 +64,11 @@ modules:
 
   - type: dnf
     repos:
-      - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
-      - https://terra.fyralabs.com/terra.repo
-      - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+      copr:
+        - atim/starship
+        - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
+        - https://terra.fyralabs.com/terra.repo
+        - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     install:
       - NetworkManager-fortisslvpn
       - NetworkManager-fortisslvpn-gnome
@@ -104,6 +106,8 @@ modules:
       - syncthing
       - vagrant
       - wev
+      - micro
+      - starship
     remove:
       - code
       - grub2-common
@@ -128,6 +132,8 @@ modules:
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
+      - firefox
+      - firefox-langpacks
 
   # Install Docker.com packaged docker and friends
   - type: dnf
