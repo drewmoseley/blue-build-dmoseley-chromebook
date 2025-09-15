@@ -13,8 +13,6 @@ modules:
       - plymouth.enable=0
       - rd.plymouth=0
       - plymouth.ignore-serial-consoles
-      - systemd.show_status=1
-      - rd.udev.log_priority=debug
 
   - type: files
     files:
@@ -64,7 +62,7 @@ modules:
       - dconf-update-service
       #- ublue-update # https://github.com/ublue-os/ublue-update
 
-  - type: rpm-ostree
+  - type: dnf
     repos:
       - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
       - https://terra.fyralabs.com/terra.repo
@@ -89,7 +87,8 @@ modules:
       - emacs
       - g++
       - git-credential-manager
-      - grub2
+      - bootupd
+      - shim-x64
       - java-21-openjdk-headless
       - keyd
       - libstdc++-static.x86_64
@@ -102,27 +101,36 @@ modules:
       - pcsc-tools
       - qemu-user-static
       - systemd-ukify
-      - grub2-tools
       - syncthing
       - vagrant
       - wev
     remove:
       - code
-    optfix:
-      - /vagrant
-      - /uptane-sign
+      - grub2-common
+      - grub2
+      - grub2-efi-x64
+      - grub2-pc
+      - grub2-pc-modules
+      - grub2-tools
+      - grub2-tools-minimal
 
   # Delete Fedora packaged docker and friends
-  - type: rpm-ostree
+  - type: dnf
     remove:
-      - docker-ce-cli
-      - docker-ce
-      - docker-ce-rootless-extras
+      - moby-engine
+      - moby-engine-daemon
       - docker-compose-plugin
       - docker-buildx-plugin
+      - podman-docker
+      - docker-ce
+      - docker-ce-cli
+      - docker-ce-rootless-extras
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
 
   # Install Docker.com packaged docker and friends
-  - type: rpm-ostree
+  - type: dnf
     repos:
       - https://download.docker.com/linux/fedora/docker-ce.repo
     install:
@@ -216,6 +224,9 @@ modules:
   - type: systemd
     system:
       enabled:
+        - bootupd.service
+        - docker.service
+        - docker.socket
         - kargs-cleanup.service
         - ext.automount
         - work.automount
