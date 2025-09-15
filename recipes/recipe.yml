@@ -64,87 +64,87 @@ modules:
 
   - type: dnf
     repos:
-      copr:
-        - atim/starship
+      files:
         - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
         - https://terra.fyralabs.com/terra.repo
         - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     install:
-      - NetworkManager-fortisslvpn
-      - NetworkManager-fortisslvpn-gnome
-      - ansible
-      - apt
-      - aspell
-      - aspell-en
-      - autoconf
-      - automake
-      - bmap-tools
-      - btrfs-progs
-      #- chromebook-linux-audio
-      - cmake
-      #- cros-keyboard-map
-      - debootstrap
-      - dosfstools
-      - e2fsprogs
-      - emacs
-      - g++
-      - git-credential-manager
-      - bootupd
-      - shim-x64
-      - java-21-openjdk-headless
-      - keyd
-      - libstdc++-static.x86_64
-      - libtool
-      - libvirt-devel
-      #- mkosi
-      - nut-client
-      - parted
-      - pass
-      - pcsc-tools
-      - qemu-user-static
-      - systemd-ukify
-      - syncthing
-      - vagrant
-      - wev
-      - micro
-      - starship
+      packages:
+        - NetworkManager-fortisslvpn
+        - NetworkManager-fortisslvpn-gnome
+        - ansible
+        - apt
+        - aspell
+        - aspell-en
+        - autoconf
+        - automake
+        - bmap-tools
+        - btrfs-progs
+        #- chromebook-linux-audio
+        - cmake
+        #- cros-keyboard-map
+        - debootstrap
+        - dosfstools
+        - e2fsprogs
+        - emacs
+        - g++
+        - git-credential-manager
+        - bootupd
+        - shim-x64
+        - java-21-openjdk-headless
+        - keyd
+        - libstdc++-static.x86_64
+        - libtool
+        - libvirt-devel
+        #- mkosi
+        - nut-client
+        - parted
+        - pass
+        - pcsc-tools
+        - qemu-user-static
+        - systemd-ukify
+        - syncthing
+        - vagrant
+        - wev
     remove:
-      - code
-      - grub2-common
-      - grub2
-      - grub2-efi-x64
-      - grub2-pc
-      - grub2-pc-modules
-      - grub2-tools
-      - grub2-tools-minimal
+      packages:
+        - code
+        - grub2-common
+        - grub2
+        - grub2-efi-x64
+        - grub2-pc
+        - grub2-pc-modules
+        - grub2-tools
+        - grub2-tools-minimal
 
   # Delete Fedora packaged docker and friends
   - type: dnf
     remove:
-      - moby-engine
-      - moby-engine-daemon
-      - docker-compose-plugin
-      - docker-buildx-plugin
-      - podman-docker
-      - docker-ce
-      - docker-ce-cli
-      - docker-ce-rootless-extras
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
-      - firefox
-      - firefox-langpacks
+      packages:
+        - moby-engine
+        - moby-engine-daemon
+        - docker-compose-plugin
+        - docker-buildx-plugin
+        - podman-docker
+        - docker-ce
+        - docker-ce-cli
+        - docker-ce-rootless-extras
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
 
   # Install Docker.com packaged docker and friends
   - type: dnf
     repos:
-      - https://download.docker.com/linux/fedora/docker-ce.repo
+      files:
+        - https://download.docker.com/linux/fedora/docker-ce.repo
     install:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
+      packages:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
 
   - type: default-flatpaks
     configurations:
