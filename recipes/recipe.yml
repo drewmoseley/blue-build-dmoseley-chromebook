@@ -60,7 +60,6 @@ modules:
   - type: bling
     install:
       - dconf-update-service
-      #- ublue-update # https://github.com/ublue-os/ublue-update
 
   - type: dnf
     repos:
@@ -79,29 +78,20 @@ modules:
         - autoconf
         - automake
         - bmap-tools
-        - btrfs-progs
         #- chromebook-linux-audio
         - cmake
         #- cros-keyboard-map
         - debootstrap
-        - dosfstools
-        - e2fsprogs
         - emacs
         - g++
-        - git-credential-manager
-        - bootupd
-        - shim-x64
         - java-21-openjdk-headless
-        - keyd
         - libstdc++-static.x86_64
         - libtool
         - libvirt-devel
         #- mkosi
         - nut-client
-        - parted
         - pass
         - pcsc-tools
-        - qemu-user-static
         - systemd-ukify
         - syncthing
         - vagrant
@@ -109,13 +99,6 @@ modules:
     remove:
       packages:
         - code
-        - grub2-common
-        - grub2
-        - grub2-efi-x64
-        - grub2-pc
-        - grub2-pc-modules
-        - grub2-tools
-        - grub2-tools-minimal
 
   # Delete Fedora packaged docker and friends
   - type: dnf
@@ -230,7 +213,6 @@ modules:
   - type: systemd
     system:
       enabled:
-        - bootupd.service
         - docker.service
         - docker.socket
         - kargs-cleanup.service
