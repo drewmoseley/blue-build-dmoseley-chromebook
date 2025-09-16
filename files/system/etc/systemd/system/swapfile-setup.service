@@ -1,8 +1,10 @@
+# /etc/systemd/system/swapfile-setup.service
 [Unit]
 Description=Prepare /var/swapfile for disk-based swap (conditional; Btrfs-safe)
-After=local-fs.target
+DefaultDependencies=no
 RequiresMountsFor=/var
 Before=var-swapfile.swap
+After=local-fs-pre.target
 
 [Service]
 Type=oneshot
@@ -10,4 +12,4 @@ ExecStart=/usr/libexec/swapfile-setup
 RemainAfterExit=yes
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=var-swapfile.swap
