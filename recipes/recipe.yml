@@ -215,7 +215,7 @@ modules:
       enabled:
         - docker.service
         - docker.socket
-        - kargs-cleanup.service
+        - apply-kargs.service
         - ext.automount
         - work.automount
         - setup-user-groups.service

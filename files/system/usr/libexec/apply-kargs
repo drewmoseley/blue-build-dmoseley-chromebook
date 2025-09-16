@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+STAMP=/var/lib/apply-kargs.done
+[[ -e "$STAMP" ]] && exit 0
+
+# ADD the args you want:
+ADD_ARGS=(
+  systemd.show_status=1
+  rd.udev.log_priority=debug
+  plymouth.enable=0
+  rd.plymouth=0
+  plymouth.ignore-serial-consoles
+)
+
+# DELETE noisy defaults if present:
+DEL_ARGS=( quiet rhgb splash )
+
+if command -v rpm-ostree >/dev/null 2>&1; then
+  set +e
+  for a in "${ADD_ARGS[@]}"; do
+    rpm-ostree kargs --append="$a"
+  done
+  for a in "${DEL_ARGS[@]}"; do
+    rpm-ostree kargs --delete="$a"
+  done
+  set -e
+fi
+
+mkdir -p /var/lib
+touch "$STAMP"
+echo "apply-kargs: staged new deployment; reboot to use it."

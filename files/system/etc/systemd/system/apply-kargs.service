@@ -1,0 +1,10 @@
+[Unit]
+Description=One-shot add and remove kargs until bootc handles it better
+ConditionPathExists=!/var/lib/apply-kargs.done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/apply-kargs
+
+[Install]
+WantedBy=multi-user.target
