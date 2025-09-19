@@ -6,14 +6,6 @@ base-image: ghcr.io/ublue-os/bluefin-dx
 image-version: stable
 
 modules:
-  - type: kargs
-    kargs:
-      - systemd.show_status=1
-      - rd.udev.log_priority=debug
-      - plymouth.enable=0
-      - rd.plymouth=0
-      - plymouth.ignore-serial-consoles
-
   - type: files
     files:
       - source: system
@@ -215,7 +207,6 @@ modules:
       enabled:
         - docker.service
         - docker.socket
-        - apply-kargs.service
         - ext.automount
         - work.automount
         - setup-user-groups.service
@@ -223,8 +214,3 @@ modules:
         - resource-logger.timer
         - swapfile-setup.service
         - var-swapfile.swap
-      masked:
-        - plymouth-start.service
-        - plymouth-quit.service
-        - plymouth-quit-wait.service
-        - plymouth-read-write.service
