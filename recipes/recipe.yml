@@ -56,7 +56,6 @@ modules:
   - type: dnf
     repos:
       files:
-        - https://copr.fedorainfracloud.org/coprs/pvermeer/chromebook-linux-audio/repo/fedora-%OS_VERSION%/pvermeer-chromebook-linux-audio-fedora-%OS_VERSION%.repo
         - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     install:
       packages:
@@ -69,9 +68,7 @@ modules:
         - autoconf
         - automake
         - bmap-tools
-        #- chromebook-linux-audio
         - cmake
-        #- cros-keyboard-map
         - debootstrap
         - emacs
         - g++
@@ -118,6 +115,16 @@ modules:
         - containerd.io
         - docker-buildx-plugin
         - docker-compose-plugin
+
+  - type: dnf
+    repos:
+      copr:
+        - pvermeer/chromebook-linux-audio
+    #install:
+      #packages:
+        #- chromebook-linux-audio
+        #- cros-keyboard-map
+      #skip-unavailable: true
 
   - type: default-flatpaks
     configurations:
