@@ -80,7 +80,6 @@ modules:
         - libstdc++-static.x86_64
         - libtool
         - libvirt-devel
-        #- mkosi
         - nut-client
         - pass
         - pcsc-tools
