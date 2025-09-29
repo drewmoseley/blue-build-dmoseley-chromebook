@@ -119,12 +119,14 @@ modules:
   - type: dnf
     repos:
       copr:
+        - derenderkeks/proxmox-backup-client
         - pvermeer/chromebook-linux-audio
-    #install:
-      #packages:
+    install:
+      packages:
+        - proxmox-backup-client
         #- chromebook-linux-audio
         #- cros-keyboard-map
-      #skip-unavailable: true
+      skip-unavailable: true
 
   - type: default-flatpaks
     configurations:
