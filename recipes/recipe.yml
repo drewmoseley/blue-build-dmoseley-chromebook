@@ -221,3 +221,4 @@ modules:
         - resource-logger.timer
         - swapfile-setup.service
         - var-swapfile.swap
+        - proxmox-backup.timer

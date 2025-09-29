@@ -1,0 +1,19 @@
+[Unit]
+Description=Nightly PBS Backup
+OnFailure=notify-mail@%n
+
+[Service]
+Type=oneshot
+Environment="PBS_REPOSITORY=dmoseley@pam@pbs.lab.moseleynet.net:ext_5tb_drive"
+Environment="PBS_PASSWORD_FILE=/root/.pbs_pass"
+Environment="PBS_ENCRYPTION_PASSWORD_FILE=/root/.pbs_key_pass"
+ExecStart=/usr/libexec/proxmox-backup.sh
+StandardOutput=journal
+StandardError=inherit
+# Let backup run as long as it needs
+TimeoutStartSec=infinity
+# Allow plenty of time to cancel gracefully on shutdown
+TimeoutStopSec=30min
+KillSignal=SIGINT
+FinalKillSignal=SIGKILL
+
