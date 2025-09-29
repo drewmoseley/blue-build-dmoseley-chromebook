@@ -53,6 +53,10 @@ modules:
     install:
       - dconf-update-service
 
+  - type: script
+    scripts:
+      - install-uptane-sign.sh
+
   - type: dnf
     repos:
       files:
@@ -83,6 +87,8 @@ modules:
         - syncthing
         - vagrant
         - wev
+    optfix:
+      - /uptane-sign
     remove:
       packages:
         - code
@@ -202,10 +208,6 @@ modules:
   - type: gschema-overrides
     include:
       - dmoseley.gschema.override
-
-  - type: script
-    scripts:
-      - install-uptane-sign.sh
 
   - type: signing
 
