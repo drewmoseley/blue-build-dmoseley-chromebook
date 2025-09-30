@@ -58,9 +58,6 @@ modules:
       - install-uptane-sign.sh
 
   - type: dnf
-    repos:
-      files:
-        - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     install:
       packages:
         - NetworkManager-fortisslvpn
@@ -85,13 +82,22 @@ modules:
         - pcsc-tools
         - systemd-ukify
         - syncthing
-        - vagrant
         - wev
     optfix:
       - /uptane-sign
     remove:
       packages:
         - code
+
+  - type: dnf
+    repos:
+      files:
+        - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+    install:
+      packages:
+        - vagrant
+    optfix:
+      - /vagrant
 
   # Delete Fedora packaged docker and friends
   - type: dnf
