@@ -13,11 +13,6 @@ modules:
 
   - type: files
     files:
-      - source: ups/msmtp-mail.sh
-        destination: /etc/ups/msmtp-mail.sh
-        owner: root
-        group: nut
-        mode: 0750
       - source: ups/nut.conf
         destination: /etc/ups/nut.conf
         owner: root
@@ -35,11 +30,6 @@ modules:
         mode: 0750
       - source: ups/upssched.conf
         destination: /etc/ups/upssched.conf
-        owner: root
-        group: nut
-        mode: 0640
-      - source: ups/.msmtprc
-        destination: /etc/ups/.msmtprc
         owner: root
         group: nut
         mode: 0640

@@ -3,25 +3,11 @@ set -Eeuo pipefail
 
 # ==================== CONFIG ====================
 TO_EMAIL="drew.moseley@gmail.com"
-FROM_EMAIL="storage-monitor@$(hostname -f || hostname)"
 HOSTNAME="$(hostname -f 2>/dev/null || hostname)"
 
 # Exclude entire transport classes from SMART checks (space-separated).
 # By default, skip USB-attached disks (docks/readers often misreport).
 EXCLUDE_TRAN="${EXCLUDE_TRAN:-usb}"
-
-# msmtp path search order (first existing wins)
-for CAND in /home/linuxbrew/.linuxbrew/bin/msmtp /usr/bin/msmtp /usr/local/bin/msmtp; do
-  if [[ -x "$CAND" ]]; then MSMTP_BIN="$CAND"; break; fi
-done
-MSMTP_BIN="${MSMTP_BIN:-}"  # empty if not found
-
-# msmtp config/account detection (service-safe)
-for C in /etc/msmtprc /root/.msmtprc /home/linuxbrew/.linuxbrew/etc/msmtprc; do
-  if [[ -r "$C" ]]; then MSMTP_CONF="$C"; break; fi
-done
-MSMTP_ACCOUNT="${MSMTP_ACCOUNT:-default}"   # override via env
-MSMTP_DEBUG="${MSMTP_DEBUG:-0}"             # set to 1 to mirror --debug into journal
 
 STATE_DIR="/var/lib/storage-health"
 LAST_HASH_FILE="${STATE_DIR}/last_alert_hash.txt"
@@ -54,36 +40,17 @@ _send_to_logger() {
   { printf "STORAGE ALERT: %s\n\n" "$subject"; printf "%s\n" "$body"; } | logger -t storage-health
 }
 
+_send_to_mail() {
+  local subject="$1" recipient="$2" body="$3"
+  printf "%s\n" "${body}" | mail -s $subject $recipient
+}
+
 send_mail_and_log() {
   local subject="$1" body="$2"
 
-  # Always write to file and syslog
   _log_to_file "$subject" "$body"
   _send_to_logger "$subject" "$body"
-
-  # Email via msmtp if available and we found a config
-  if [[ -n "${MSMTP_BIN:-}" && -x "$MSMTP_BIN" && -n "${MSMTP_CONF:-}" ]]; then
-    if [[ "${MSMTP_DEBUG}" -eq 1 ]]; then
-      {
-        printf "From: %s\n" "${FROM_EMAIL}"
-        printf "To: %s\n" "${TO_EMAIL}"
-        printf "Subject: %s\n" "${subject}"
-        printf "Date: %s\n" "$(LC_ALL=C date -R)"
-        printf "Content-Type: text/plain; charset=UTF-8\n\n"
-        printf "%s\n" "${body}"
-      } | "$MSMTP_BIN" -t -C "$MSMTP_CONF" -a "$MSMTP_ACCOUNT" --debug 2>&1 \
-        | logger -t storage-health
-    else
-      {
-        printf "From: %s\n" "${FROM_EMAIL}"
-        printf "To: %s\n" "${TO_EMAIL}"
-        printf "Subject: %s\n" "${subject}"
-        printf "Date: %s\n" "$(LC_ALL=C date -R)"
-        printf "Content-Type: text/plain; charset=UTF-8\n\n"
-        printf "%s\n" "${body}"
-      } | "$MSMTP_BIN" -t -C "$MSMTP_CONF" -a "$MSMTP_ACCOUNT" || true
-    fi
-  fi
+  _send_to_mail "$subject" "${TO_EMAIL}" "$body"
 }
 
 now_ts() { date -u +"%Y-%m-%d %H:%M:%S UTC"; }

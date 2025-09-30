@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Emulate standard mail command line using custom msmtp script.
+#
+
+if [ -x ${HOME}/SyncThing/mackup/bin/msmtp-mail.sh ]; then
+   exec ${HOME}/SyncThing/mackup/bin/msmtp-mail.sh "$@"
+else
+   echo "Error. Unable to locate msmtp-mail.sh script"
+   exit 1
+fi
