@@ -42,7 +42,7 @@ _send_to_logger() {
 
 _send_to_mail() {
   local subject="$1" recipient="$2" body="$3"
-  printf "%s\n" "${body}" | mail -s $subject $recipient
+  printf "%s\n" "${body}" | mail -s "$subject" "$recipient"
 }
 
 send_mail_and_log() {
