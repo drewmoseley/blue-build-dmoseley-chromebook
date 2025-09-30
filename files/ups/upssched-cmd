@@ -9,7 +9,7 @@ log() {
   BODY="$2"
   logger -t upssched-cmd "$SUBJECT - $BODY"
   echo "$SUBJECT - $BODY" >> /var/log/nut-events.log
-  [ "$3" != "--no-mail"] && echo "$BODY" | mail -s "$SUBJECT" "$MAIL_TO"
+  [ "$3" != "--no-mail" ] && echo "$BODY" | mail -s "$SUBJECT" "$MAIL_TO"
 }
 
 case "$1" in
