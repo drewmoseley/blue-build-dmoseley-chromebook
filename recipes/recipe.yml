@@ -89,16 +89,6 @@ modules:
       packages:
         - code
 
-  - type: dnf
-    repos:
-      files:
-        - https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    install:
-      packages:
-        - vagrant
-    optfix:
-      - /vagrant
-
   # Delete Fedora packaged docker and friends
   - type: dnf
     remove:
