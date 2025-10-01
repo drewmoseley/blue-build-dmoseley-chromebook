@@ -10,7 +10,7 @@ log() {
   OPTPARM="${3:-}"
   logger -t upssched-cmd "$SUBJECT - $BODY"
   echo "$SUBJECT - $BODY" >> /var/log/nut-events.log
-  [ "$OPTPARM" == "--no-mail" ] || echo "$BODY" | mail -s "$SUBJECT" "$MAIL_TO"
+  [ "$OPTPARM" == "--no-mail" ] || echo "$BODY" | sudo -u dmoseley mail -s "$SUBJECT" "$MAIL_TO"
 }
 
 case "$1" in
