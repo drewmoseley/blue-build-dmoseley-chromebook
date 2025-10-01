@@ -4,6 +4,8 @@ OnFailure=notify-mail@%n
 
 [Service]
 Type=oneshot
+User=root
+Environment="HOME=/root"
 Environment="PBS_REPOSITORY=dmoseley@pam@pbs.lab.moseleynet.net:ext_5tb_drive"
 Environment="PBS_PASSWORD_FILE=/root/.pbs_pass"
 Environment="PBS_ENCRYPTION_PASSWORD_FILE=/root/.pbs_key_pass"
