@@ -5,6 +5,10 @@
 
 if [ -x ${HOME}/SyncThing/mackup/bin/msmtp-mail.sh ]; then
    exec ${HOME}/SyncThing/mackup/bin/msmtp-mail.sh "$@"
+elif [ -x /root/SyncThing/mackup/bin/msmtp-mail.sh ]; then
+   exec /root/SyncThing/mackup/bin/msmtp-mail.sh "$@"
+elif [ -x /home/dmoseley/SyncThing/mackup/bin/msmtp-mail.sh ]; then
+   exec /home/dmoseley/SyncThing/mackup/bin/msmtp-mail.sh "$@"
 else
    echo "Error. Unable to locate msmtp-mail.sh script"
    exit 1
