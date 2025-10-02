@@ -13,4 +13,12 @@ modules:
     install:
       packages:
         - chromebook-linux-audio
-        - cros-keyboard-map
+
+  # Terra is installed in bluefin at the moment but disabled by default.
+  - type: dnf
+    install:
+      packages:
+        - python3-libfdt
+        - repo: terra
+          packages:
+            - cros-keyboard-map
