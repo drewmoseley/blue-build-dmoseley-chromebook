@@ -1,9 +1,0 @@
-[org.gnome.desktop.peripherals.touchpad]
-tap-to-click=false
-natural-scroll=true
-click-method='areas'
-edge-scrolling-enabled=false
-two-finger-scrolling-enabled=true
-
-[org.gnome.desktop.peripherals.mouse]
-natural-scroll=true

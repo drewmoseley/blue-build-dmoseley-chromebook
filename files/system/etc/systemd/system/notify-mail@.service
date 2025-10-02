@@ -1,8 +1,0 @@
-[Unit]
-Description=Email logs when %i fails
-
-[Service]
-Type=oneshot
-User=dmoseley
-Environment="MAIL_TO=drew.moseley@gmail.com"
-ExecStart=/usr/libexec/systemd-notify-failure.sh %i

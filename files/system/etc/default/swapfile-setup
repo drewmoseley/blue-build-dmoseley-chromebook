@@ -1,4 +1,0 @@
-# Optional overrides for swapfile creation
-# SWAP_PRI=5
-# SWAP_GIB=24
-# RAM_LIMIT_GIB=48

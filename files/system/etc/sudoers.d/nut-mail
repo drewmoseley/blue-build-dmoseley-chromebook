@@ -1,4 +1,0 @@
-nut ALL=(ALL) NOPASSWD: /usr/sbin/mail
-nut ALL=(ALL) NOPASSWD: /usr/bin/mail
-nut ALL=(ALL) NOPASSWD: /bin/mail
-nut ALL=(ALL) NOPASSWD: /sbin/mail
