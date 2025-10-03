@@ -20,6 +20,27 @@ if [ ! -f /var/lib/chromebook-audio-configured ]; then
     ./setup-audio
     rm -rf /tmp/alsa-ucm-conf-cros
 
+    # Add Landia platform detection
+    mkdir -p /var/lib/alsa-ucm-upper/platforms/intel-sof
+    cat >> /var/lib/alsa-ucm-upper/platforms/intel-sof/platform.conf << 'EOF'
+# JSL variant for device 0x4e26 (Landia)
+If.jsl-landia {
+	Condition {
+		Type String
+		String1 "$${sys:bus/pci/devices/0000:00:00.0/device}"
+		String2 "0x4e26"
+	}
+	True {
+		Define.platform jsl
+		Define.spkpcm 0
+		Define.hppcm 1
+		Define.hpmicpcm 1
+		Define.dmicpcm 5
+		Define.hdmi hdmi234
+	}
+}
+EOF
+
     # Mark as configured
     touch /var/lib/chromebook-audio-configured
 fi
