@@ -6,6 +6,16 @@ base-image: ghcr.io/drewmoseley/blue-build-dmoseley
 image-version: latest
 
 modules:
+  # Add configuration files for linux-audio postinstall scriptlet
+  # Unfortunately this has to be done at boot time as it probes the hardware
+  # and makes config changes.  That also means we have to do a writable
+  # overlay for the files it changes.  Hopefully some day this can be
+  # folded back into the package.
+  - type: files
+    files:
+      - source: system
+        destination: /
+
   - type: dnf
     repos:
       copr:
@@ -13,6 +23,12 @@ modules:
     install:
       packages:
         - chromebook-linux-audio
+
+  # Enable the service
+  - type: systemd
+    system:
+      enabled:
+        - chromebook-audio-setup.service
 
   # Terra is installed in bluefin at the moment but disabled by default.
   - type: dnf

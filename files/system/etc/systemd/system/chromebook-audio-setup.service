@@ -1,0 +1,12 @@
+[Unit]
+Description=Chromebook Audio Setup with Overlays
+After=local-fs.target
+Before=sound.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/chromebook-audio-setup.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
