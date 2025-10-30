@@ -30,8 +30,9 @@ modules:
       enabled:
         - chromebook-audio-setup.service
 
-  # Terra is installed in bluefin at the moment but disabled by default.
   - type: dnf
+    repos:
+      - https://terra.fyralabs.com/terra.repo
     install:
       packages:
         - python3-libfdt
