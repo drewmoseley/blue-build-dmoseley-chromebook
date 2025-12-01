@@ -19,18 +19,14 @@ modules:
   - type: dnf
     repos:
       files:
-        - https://terra.fyralabs.com/terra.repo
+        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
       copr:
         - pvermeer/chromebook-linux-audio
     install:
       packages:
         - python3-libfdt
-        - repo: terra
-          packages:
-            - cros-keyboard-map
-        - repo: copr:copr.fedorainfracloud.org:pvermeer:chromebook-linux-audio
-          packages:
-            - chromebook-linux-audio
+        - cros-keyboard-map
+        - chromebook-linux-audio
 
   # Enable the service
   - type: systemd
