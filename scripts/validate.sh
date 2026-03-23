@@ -27,17 +27,27 @@ check_executable_bits() {
 check_recipe_expectations() {
   echo "Checking recipe source expectations"
 
-  if ! rg -q '^base-image: ghcr\.io/drewmoseley/blue-build-dmoseley$' recipes/recipe.yml; then
+  if command -v rg >/dev/null 2>&1; then
+    recipe_search() {
+      rg -q "$1" recipes/recipe.yml
+    }
+  else
+    recipe_search() {
+      grep -Eq "$1" recipes/recipe.yml
+    }
+  fi
+
+  if ! recipe_search '^base-image: ghcr\.io/drewmoseley/blue-build-dmoseley$'; then
     echo "recipes/recipe.yml must keep the expected parent image." >&2
     exit 1
   fi
 
-  if ! rg -q 'https://github\.com/terrapkg/subatomic-repos/raw/main/terra\.repo' recipes/recipe.yml; then
+  if ! recipe_search 'https://github\.com/terrapkg/subatomic-repos/raw/main/terra\.repo'; then
     echo "recipes/recipe.yml must explicitly pin the expected Terra repo source." >&2
     exit 1
   fi
 
-  if ! rg -q 'pvermeer/chromebook-linux-audio' recipes/recipe.yml; then
+  if ! recipe_search 'pvermeer/chromebook-linux-audio'; then
     echo "recipes/recipe.yml must keep the expected Chromebook audio COPR source." >&2
     exit 1
   fi
