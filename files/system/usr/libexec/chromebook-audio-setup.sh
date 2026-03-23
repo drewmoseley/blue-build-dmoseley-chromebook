@@ -16,7 +16,7 @@ mount -t overlay overlay \
 if [ ! -f /var/lib/chromebook-audio-configured ]; then
     # Run the audio setup
     cp -r /usr/share/chromebook-linux-audio/alsa-ucm-conf-cros /tmp
-    cd /usr/share/chromebook-linux-audio/chromebook-linux-audio
+    cd /usr/share/chromebook-linux-audio/chromebook-linux-audio || exit 1
     ./setup-audio
     rm -rf /tmp/alsa-ucm-conf-cros
 
