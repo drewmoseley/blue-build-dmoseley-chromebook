@@ -25,6 +25,7 @@ modules:
     install:
       packages:
         - python3-libfdt
+        - keyd
         - cros-keyboard-map
         - chromebook-linux-audio
 
