@@ -22,6 +22,7 @@ modules:
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
       copr:
         - pvermeer/chromebook-linux-audio
+        - alternateved/keyd
     install:
       packages:
         - python3-libfdt
