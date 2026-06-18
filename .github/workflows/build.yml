@@ -11,6 +11,8 @@ name: bluebuild
 
   pull_request:
   workflow_dispatch:  # allow manually triggering builds
+  repository_dispatch:  # rebuild when the bluefin base image is republished
+    types: [base-image-updated]
 concurrency:
   # only run one build at a time
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
