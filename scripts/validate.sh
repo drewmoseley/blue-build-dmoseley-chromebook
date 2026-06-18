@@ -83,6 +83,40 @@ run_shellcheck() {
   exit 1
 }
 
+YAMLLINT_TARGETS=(
+  .github/workflows
+  recipes/recipe.yml
+)
+
+run_yamllint() {
+  # Mirror CI (validate.yml): yamllint the workflows + recipe against the
+  # repo's .yamllint.yml (auto-discovered from the working dir). CI runs this
+  # as a separate step, so without it `validate.sh` would pass while CI fails
+  # (e.g. the 80-char line-length cap). Container-first like run_shellcheck so
+  # no host install is required.
+  echo "Running yamllint"
+
+  if command -v podman >/dev/null 2>&1; then
+    podman run --rm -v "${REPO_ROOT}:/src:ro" -w /src \
+      docker.io/cytopia/yamllint:latest "${YAMLLINT_TARGETS[@]}"
+    return
+  fi
+
+  if command -v docker >/dev/null 2>&1; then
+    docker run --rm -v "${REPO_ROOT}:/src:ro" -w /src \
+      cytopia/yamllint:latest "${YAMLLINT_TARGETS[@]}"
+    return
+  fi
+
+  if command -v yamllint >/dev/null 2>&1; then
+    yamllint "${YAMLLINT_TARGETS[@]}"
+    return
+  fi
+
+  echo "yamllint is unavailable: install yamllint or provide podman/docker" >&2
+  exit 1
+}
+
 run_systemd_verify() {
   local tmpdir
   tmpdir="$(mktemp -d /tmp/systemd-verify.XXXXXX)"
@@ -130,4 +164,5 @@ EOF
 check_executable_bits
 check_recipe_expectations
 run_shellcheck
+run_yamllint
 run_systemd_verify

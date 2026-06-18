@@ -54,6 +54,12 @@ for full details.
 blue-build build recipes/recipe.yml
 ```
 
+**YAML edits — watch the line-length cap.** CI's `validate.yml` runs `yamllint`
+on `.github/workflows/` + `recipes/recipe.yml` against `.yamllint.yml`, which
+enforces an **80-char line limit** (characters, so a multi-byte `—` still
+costs 1). `validate.sh` now runs the same yamllint locally — run it before
+pushing a workflow/recipe change; YAML-syntax-valid still red-X's CI on length.
+
 ## Rebasing an existing install
 
 ```bash
