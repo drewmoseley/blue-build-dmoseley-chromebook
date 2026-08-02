@@ -35,3 +35,27 @@ modules:
     system:
       enabled:
         - chromebook-audio-setup.service
+
+  # Chromebook-only flatpak trim. The parent recipe's default-flatpaks
+  # list is shared by every host; this box is disk-constrained, so drop
+  # unused/stale apps here instead of touching the shared base recipe.
+  # default-flatpaks (v2) has no "remove" key and the boot-time reconciler
+  # only installs from configuration.yaml, so edit the baked file directly.
+  # Precise line deletion is safe: flatpak app IDs are unique in the file.
+  - type: script
+    snippets:
+      - |
+        CONFIG="/usr/share/bluebuild/default-flatpaks/configuration.yaml"
+        for id in \
+            cc.arduino.IDE2 \
+            com.bambulab.BambuStudio \
+            com.ultimaker.cura \
+            fr.handbrake.ghb \
+            org.blender.Blender \
+            org.gimp.GIMP \
+            org.gnome.Boxes \
+            org.inkscape.Inkscape \
+            org.shotcut.Shotcut \
+            org.videolan.VLC; do
+          sed -i "\|^  - ${id}\$|d" "${CONFIG}"
+        done
