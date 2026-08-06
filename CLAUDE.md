@@ -19,6 +19,7 @@ Actions on every push to `main`.
 | `files/system/` | Copied verbatim to `/` in the image |
 | `files/system/usr/lib/chromebook-audio/` | Platform audio config (`platform-landia.conf`) |
 | `files/system/usr/lib/systemd/system/` | `chromebook-audio-setup.service` unit |
+| `files/system/usr/lib/tmpfiles.d/` | `chromebook-audio-dirs.conf` |
 | `files/system/usr/libexec/` | `chromebook-audio-setup.sh` runtime script |
 | `scripts/` | Local helper scripts (`validate.sh`) |
 
