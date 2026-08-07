@@ -52,6 +52,7 @@ modules:
             com.ultimaker.cura \
             fr.handbrake.ghb \
             org.blender.Blender \
+            org.freecad.FreeCAD \
             org.gimp.GIMP \
             org.gnome.Boxes \
             org.inkscape.Inkscape \
