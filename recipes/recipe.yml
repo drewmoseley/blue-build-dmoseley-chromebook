@@ -35,12 +35,6 @@ modules:
     system:
       enabled:
         - chromebook-audio-setup.service
-    # GRUB is not the active bootloader here (no grubenv), so the
-    # mark-boot-successful user units can only fail.
-    user:
-      masked:
-        - grub-boot-success.timer
-        - grub-boot-success.service
 
   # Chromebook-only flatpak trim. The parent recipe's default-flatpaks
   # list is shared by every host; this box is disk-constrained, so drop
